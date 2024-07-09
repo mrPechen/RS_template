@@ -8,7 +8,6 @@ class AccountService:
     @classmethod
     @transaction.atomic
     def update(cls, instance, validated_data):
-        print(validated_data)
         password = validated_data.pop('password', None)
         new_mentored_users = validated_data.pop('mentored_users', None)
         new_role = validated_data.pop('role', None)
@@ -29,11 +28,9 @@ class AccountService:
             instance.set_password(password)
             instance.set_encrypted_password(password)
 
-        print(new_mentored_users)
         if new_mentored_users and instance.role == role.Mentor:
             instance.mentor.mentored_users.clear()
             new_mentored_users = User.objects.filter(account__id__in=new_mentored_users)
-            print(new_mentored_users)
             instance.mentor.mentored_users.set(new_mentored_users)
 
         for key, value in validated_data.items():
