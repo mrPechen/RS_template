@@ -30,7 +30,7 @@ class AccountService:
 
         if new_mentored_users and instance.role == role.Mentor:
             instance.mentor.mentored_users.clear()
-            new_mentored_users = User.objects.filter(account__id__in=new_mentored_users)
+            new_mentored_users = User.objects.filter(mentor=None, account__id__in=new_mentored_users)
             instance.mentor.mentored_users.set(new_mentored_users)
 
         for key, value in validated_data.items():
