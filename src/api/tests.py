@@ -1,3 +1,5 @@
-from django.test import TestCase
+a = None
 
-# Create your tests here.
+match a:
+    case 'user':
+        print('fsfs')

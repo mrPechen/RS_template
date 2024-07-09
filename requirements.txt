@@ -4,3 +4,4 @@ psycopg2
 djangorestframework-simplejwt
 drf-yasg
 environs==9.5.0
+cryptography

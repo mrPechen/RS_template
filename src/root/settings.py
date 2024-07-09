@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +103,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'api.Account'
+
+BINARY_CODE = env.str('BINARY_CODE')
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

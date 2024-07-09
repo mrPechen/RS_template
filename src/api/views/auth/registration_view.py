@@ -9,9 +9,7 @@ from api.models import Account
 
 
 class RegistrationView(APIView):
-
     class InputSerializer(ModelSerializer):
-
         email = EmailField(required=False)
         phone = CharField(required=False)
 
@@ -27,6 +25,7 @@ class RegistrationView(APIView):
 
         def create(self, validated_data):
             user = Account.objects.create_user(**validated_data)
+            user.set_encrypted_password(validated_data['password'])
             return user
 
     def post(self, request):
