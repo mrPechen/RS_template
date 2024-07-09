@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer, ReadOnlyField
 from rest_framework.views import APIView
@@ -17,7 +18,13 @@ class GetUsersView(APIView):
         class Meta:
             model = Account
             fields = ['account_id', 'login', 'mentor_id']
+            ref_name = 'Output all users serializer'
 
+    @swagger_auto_schema(responses={
+        200: OutputSerializer,
+        401: 'Unauthorized',
+    }, tags=['user'],
+    )
     def get(self, request):
         instance = Account.objects.all()
         serializer = self.OutputSerializer(instance, many=True)
