@@ -6,3 +6,4 @@ drf-yasg
 environs==9.5.0
 cryptography
 redis
+pytest-django
