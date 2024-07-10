@@ -84,6 +84,19 @@ DATABASES = {
     }
 }
 
+REDIS_PASSWORD = env.str('REDIS_PASSWORD')
+REDIS_HOST = env.str('REDIS_HOST')
+REDIS_PORT = env.str('REDIS_PORT')
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": f"redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}",
+    }
+}
+
+ALL_USERS_CACHE = 'all_users'
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

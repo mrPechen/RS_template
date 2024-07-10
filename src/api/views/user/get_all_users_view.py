@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer, ReadOnlyField
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-
+from django.core.cache import cache
+from django.conf import settings
 from api.models import Account
 
 
@@ -26,6 +27,10 @@ class GetUsersView(APIView):
     }, tags=['user'],
     )
     def get(self, request):
+        caches = cache.get(settings.ALL_USERS_CACHE)
+        if caches:
+            return Response(caches)
         instance = Account.objects.all()
         serializer = self.OutputSerializer(instance, many=True)
+        cache.set(settings.ALL_USERS_CACHE, serializer.data)
         return Response(data=serializer.data, status=200)

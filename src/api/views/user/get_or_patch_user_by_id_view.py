@@ -1,9 +1,10 @@
+from django.conf import settings
 from django.shortcuts import get_object_or_404
-from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.fields import CharField, ListField, IntegerField
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.core.cache import cache
 
 from api.models import Account
 from api.serializers.factories import GetRequestFactory
@@ -26,6 +27,7 @@ class GetOrPatchUserView(APIView):
 
         def update(self, instance, validated_data):
             result = AccountService.update(instance, validated_data)
+            cache.delete(settings.ALL_USERS_CACHE)
             return result
 
     @swagger_auto_schema(responses={
