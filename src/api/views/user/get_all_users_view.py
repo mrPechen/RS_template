@@ -29,7 +29,7 @@ class GetUsersView(APIView):
     def get(self, request):
         caches = cache.get(settings.ALL_USERS_CACHE)
         if caches:
-            return Response(caches)
+            return Response(data=caches, status=201)
         instance = Account.objects.all()
         serializer = self.OutputSerializer(instance, many=True)
         cache.set(settings.ALL_USERS_CACHE, serializer.data)
