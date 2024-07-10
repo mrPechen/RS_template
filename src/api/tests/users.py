@@ -33,7 +33,7 @@ def patch_user(request, api_client, auth_cache: str,
     anon_response = api_client.patch(url, data=body)
     assert anon_response.status_code == 401
     api_client.credentials(HTTP_AUTHORIZATION=f'Bearer {cache["access"]}')
-    bad_id = user_id+1
+    bad_id = user_id + 1
     bad_url = reverse('user_by_id', args=[bad_id])
     bad_response = api_client.patch(bad_url, data=body)
     assert bad_response.status_code == 403

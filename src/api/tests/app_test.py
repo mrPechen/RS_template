@@ -33,4 +33,3 @@ def test(request, api_client):
              vars.ASSERTION_AFTER_PATCH_BODY_USER_1, 1)
     get_user(request, api_client, vars.USER_1_CACHE_AUTH,
              vars.ASSERTION_AFTER_PATCH_BODY_USER_2, 2)
-

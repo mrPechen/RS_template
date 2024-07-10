@@ -21,7 +21,6 @@ ASSERTION_DATA_FOR_GET_USER_ID1 = {
     "password": "654321Qq"
 }
 
-
 ASSERTION_DATA_FOR_GET_USER_ID2 = {
     "id": 2,
     "login": "user2",
@@ -48,7 +47,6 @@ ASSERTION_AFTER_PATCH_BODY_USER_1 = {
     "password": "654321Qq",
     "mentored_users": ['user2']
 }
-
 
 ASSERTION_AFTER_PATCH_BODY_USER_2 = {
     "id": 2,

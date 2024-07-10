@@ -12,13 +12,12 @@ class GetUsersView(APIView):
     permission_classes = [IsAuthenticated]
 
     class OutputSerializer(ModelSerializer):
-        account_id = ReadOnlyField(source='id')
         login = ReadOnlyField(source='username')
-        mentor_id = ReadOnlyField(source='user.mentor.id')
+        mentor_id = ReadOnlyField(source='user.mentor.account.id')
 
         class Meta:
             model = Account
-            fields = ['account_id', 'login', 'mentor_id']
+            fields = ['id', 'login', 'mentor_id']
             ref_name = 'Output all users serializer'
 
     @swagger_auto_schema(responses={
